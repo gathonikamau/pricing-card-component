@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing Card Demo</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f5f5f5;
+      padding: 2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <!-- Attribute-driven instance (same content as your original card) -->
+    <pricing-card
+      title="Basic Plan"
+      price="$9.99 /month"
+      features="1 GB Storage|Basic Support|All Core Features"
+      button-label="Start Trial"
+    ></pricing-card>
+
+    <!-- Slot-driven instance for custom feature markup -->
+    <pricing-card
+      title="Pro Plan"
+      price="$19.99 /month"
+      button-label="Subscribe"
+      highlighted
+    >
+      <li slot="feature">10 GB Storage</li>
+      <li slot="feature">Priority Support</li>
+      <li slot="feature">All Core Features</li>
+      <li slot="feature">Analytics Dashboard</li>
+    </pricing-card>
+  </div>
+
+  <script type="module" src="./pricing-card.js"></script>
+  <script type="module">
+    document.querySelectorAll('pricing-card').forEach((card) => {
+      card.addEventListener('pricing-card-cta', (e) => {
+        const title = e.target.getAttribute('title');
+        console.log(`CTA clicked: ${title}`);
+      });
+    });
+  </script>
+</body>
+</html>
